@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+//struct
 typedef struct coord
 {
     int l, c;
