@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-//struct
 typedef struct coord
 {
     int l, c;
@@ -17,6 +15,11 @@ typedef struct Stiva
     int generatie;
     struct Stiva *urm;
 } Stiva;
+typedef struct arbore
+{
+    Nod *lista;
+    struct arbore *left, *right;
+} arbore;
 void citire(int *t, int *n, int *m, int *k, char mat[300][300], FILE *fisier1)
 {
     int i, j;
@@ -71,6 +74,28 @@ void vie_moarta(int n, int m, char mat[300][300])
             else
             {
                 if (nr == 3)
+                    aux[i][j] = 'X';
+                else
+                    aux[i][j] = '+';
+            }
+        }
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+            mat[i][j] = aux[i][j];
+}
+void vie_moartaB(int n, int m, char mat[300][300])
+{
+    int i, j, nr;
+    char aux[300][300];
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+        {
+            nr = nr_vecini(n, m, mat, i, j);
+            if (mat[i][j] == 'X')
+                aux[i][j] = 'X';
+            else
+            {
+                if (nr == 2)
                     aux[i][j] = 'X';
                 else
                     aux[i][j] = '+';
