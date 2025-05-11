@@ -12,8 +12,8 @@
   <line>Command: /mnt/c/Users/Mihai/Desktop/tema_PA/gameoflife/a.out task1 Ana are mere --file=/mnt/c/Users/Mihai/Desktop/tema_PA/gameoflife/teste/dir1/dir4/in2.txt --out=/mnt/c/Users/Mihai/Desktop/tema_PA/gameoflife/OutputData/data2.out</line>
 </preamble>
 
-<pid>104895</pid>
-<ppid>104871</ppid>
+<pid>149052</pid>
+<ppid>149024</ppid>
 <tool>memcheck</tool>
 
 <args>
@@ -36,13 +36,13 @@
 
 <status>
   <state>RUNNING</state>
-  <time>00:00:00:00.118 </time>
+  <time>00:00:00:00.230 </time>
 </status>
 
 
 <status>
   <state>FINISHED</state>
-  <time>00:00:00:01.393 </time>
+  <time>00:00:00:02.553 </time>
 </status>
 
 <errorcounts>

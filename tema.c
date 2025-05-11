@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 typedef struct coord
 {
     int l, c;
@@ -216,11 +217,50 @@ void construire_arbore(arbore *nod, char mat[300][300], int n, int m, int k, int
     nod->right = right;
     construire_arbore(right, aux2, n, m, k, h + 1);
 }
-void preorder(arbore* root,FILE *fisier2) {
-    if (root) {
-        fprintf(fisier2,"%d ", root->lista);
-        preorder(root->left,fisier2);
-        preorder(root->right,fisier2);
+void preorder(arbore *root, FILE *fisier2, int n, int m, char mat[300][300])
+{
+    if (!root)
+        return;
+    afisare(n, m, mat, fisier2);
+    if (root->left)
+    {
+        char aux_stanga[300][300];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                aux_stanga[i][j] = mat[i][j];
+        Nod *curent = root->left->lista;
+        while (curent)
+        {
+            int linie, col;
+            linie = curent->coord.l;
+            col = curent->coord.c;
+            if (aux_stanga[linie][col] == 'X')
+                aux_stanga[linie][col] = '+';
+            else
+                aux_stanga[linie][col] = 'X';
+            curent = curent->urm;
+        }
+        preorder(root->left, fisier2, n, m, aux_stanga);
+    }
+    if (root->right)
+    {
+        char aux_dreapta[300][300];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                aux_dreapta[i][j] = mat[i][j];
+        Nod *curent = root->right->lista;
+        while (curent)
+        {
+            int linie, col;
+            linie = curent->coord.l;
+            col = curent->coord.c;
+            if (aux_dreapta[linie][col] == 'X')
+                aux_dreapta[linie][col] = '+';
+            else
+                aux_dreapta[linie][col] = 'X';
+            curent = curent->urm;
+        }
+        preorder(root->right, fisier2, n, m, aux_dreapta);
     }
 }
 int main(int argc, const char *argv[])
@@ -273,13 +313,13 @@ int main(int argc, const char *argv[])
     else if (t == 3)
     {
         arbore *root = creare_nod();
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < m; j++)
-                if (mat[i][j] == 'X')
-                    root->lista = push(root->lista, i, j);
+        for (int lin = 0; lin < n; lin++)
+            for (int col = 0; col < m; col++)
+                if (mat[lin][col] == 'X')
+                    root->lista = push(root->lista, lin, col);
         root->lista = inversare_lista(root->lista);
-        construire_arbore(root,mat,n,m,k,0);
-        preorder(root,fisier2);
+        construire_arbore(root, mat, n, m, k, 0);
+        preorder(root, fisier2, n, m, mat);
     }
     fclose(fisier2);
     return 0;
