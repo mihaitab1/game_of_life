@@ -177,6 +177,52 @@ Stiva *inversare_stiva(Stiva *varf)
     }
     return aux;
 }
+arbore *creare_nod()
+{
+    arbore *nou = (arbore *)malloc(sizeof(arbore));
+    nou->lista = NULL;
+    nou->left = NULL;
+    nou->right = NULL;
+    return nou;
+}
+void construire_arbore(arbore *nod, char mat[300][300], int n, int m, int k, int h)
+{
+    if (k == h)
+        return;
+    char aux[300][300];
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            aux[i][j] = mat[i][j];
+    vie_moartaB(n, m, aux);
+    arbore *left = creare_nod();
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            if (mat[i][j] != aux[i][j])
+                left->lista = push(left->lista, i, j);
+    left->lista = inversare_lista(left->lista);
+    nod->left = left;
+    construire_arbore(left, aux, n, m, k, h + 1);
+    char aux2[300][300];
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            aux2[i][j] = mat[i][j];
+    vie_moarta(n, m, aux2);
+    arbore *right = creare_nod();
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            if (mat[i][j] != aux2[i][j])
+                right->lista = push(right->lista, i, j);
+    right->lista = inversare_lista(right->lista);
+    nod->right = right;
+    construire_arbore(right, aux2, n, m, k, h + 1);
+}
+void preorder(arbore* root,FILE *fisier2) {
+    if (root) {
+        fprintf(fisier2,"%d ", root->lista);
+        preorder(root->left,fisier2);
+        preorder(root->right,fisier2);
+    }
+}
 int main(int argc, const char *argv[])
 {
     FILE *fisier1 = fopen(argv[1], "r");
@@ -221,9 +267,20 @@ int main(int argc, const char *argv[])
             cap_lista = inversare_lista(cap_lista);
             varf = push_stiva(varf, cap_lista, i);
         }
+        varf = inversare_stiva(varf);
+        afisare_stiva(varf, fisier2);
     }
-    varf = inversare_stiva(varf);
-    afisare_stiva(varf, fisier2);
+    else if (t == 3)
+    {
+        arbore *root = creare_nod();
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                if (mat[i][j] == 'X')
+                    root->lista = push(root->lista, i, j);
+        root->lista = inversare_lista(root->lista);
+        construire_arbore(root,mat,n,m,k,0);
+        preorder(root,fisier2);
+    }
     fclose(fisier2);
     return 0;
 }
