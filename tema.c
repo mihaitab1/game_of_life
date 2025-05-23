@@ -334,9 +334,10 @@ int main(int argc, const char *argv[])
     else if (t == 5) // pentru bonus
     {
         Stiva *varf = NULL;
+        char linie[9000];
+        fgets(linie, sizeof(linie), fisier1);
         for (int gen = 1; gen <= k; gen++)
         {
-            char linie[9000];
             Nod *cap_lista = NULL;
             fgets(linie, sizeof(linie), fisier1);
             char *p = strtok(linie, " ");

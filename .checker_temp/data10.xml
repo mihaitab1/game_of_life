@@ -12,8 +12,8 @@
   <line>Command: /mnt/c/Users/Mihai/Desktop/tema_PA/gameoflife/a.out task2 /mnt/c/Users/Mihai/Desktop/tema_PA/gameoflife/teste/dir1 --out=/mnt/c/Users/Mihai/Desktop/tema_PA/gameoflife/OutputData/data10.out</line>
 </preamble>
 
-<pid>44099</pid>
-<ppid>44076</ppid>
+<pid>53433</pid>
+<ppid>53394</ppid>
 <tool>memcheck</tool>
 
 <args>
@@ -33,13 +33,13 @@
 
 <status>
   <state>RUNNING</state>
-  <time>00:00:00:00.242 </time>
+  <time>00:00:00:00.126 </time>
 </status>
 
 
 <status>
   <state>FINISHED</state>
-  <time>00:00:00:02.892 </time>
+  <time>00:00:00:01.359 </time>
 </status>
 
 <errorcounts>
