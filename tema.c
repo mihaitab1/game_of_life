@@ -30,7 +30,6 @@ void citire(int *t, int *n, int *m, int *k, char mat[300][300], FILE *fisier1)
     for (i = 0; i < *n; i++)
         for (j = 0; j < *m; j++)
             fscanf(fisier1, " %c", &mat[i][j]);
-    fclose(fisier1);
 }
 void afisare(int n, int m, const char mat[300][300], FILE *fisier2)
 {
@@ -321,6 +320,58 @@ int main(int argc, const char *argv[])
         construire_arbore(root, mat, n, m, k, 0);
         preorder(root, fisier2, n, m, mat);
     }
+    else if (t == 4)
+    {
+        arbore *root = creare_nod();
+        for (int lin = 0; lin < n; lin++)
+            for (int col = 0; col < m; col++)
+                if (mat[lin][col] == 'X')
+                    root->lista = push(root->lista, lin, col);
+        root->lista = inversare_lista(root->lista);
+        construire_arbore(root, mat, n, m, k, 0);
+        preorder(root, fisier2, n, m, mat);
+    }
+    else if (t == 5) // pentru bonus
+    {
+        Stiva *varf = NULL;
+        for (int gen = 1; gen <= k; gen++)
+        {
+            char linie[9000];
+            Nod *cap_lista = NULL;
+            fgets(linie, sizeof(linie), fisier1);
+            char *p = strtok(linie, " ");
+            p = strtok(NULL, " ");
+            while (p != NULL)
+            {
+                int i = atoi(p);
+                p = strtok(NULL, " ");
+                int j = atoi(p);
+                p = strtok(NULL, " ");
+                cap_lista = push(cap_lista, i, j);
+            }
+            cap_lista = inversare_lista(cap_lista);
+            varf = push_stiva(varf, cap_lista, gen);
+        }
+        varf = inversare_stiva(varf);
+        Stiva *aux = varf;
+        while (aux)
+        {
+            Nod *nou = aux->lista;
+            while (nou)
+            {
+                int l = nou->coord.l;
+                int c = nou->coord.c;
+                if (mat[l][c] == 'X')
+                    mat[l][c] = '+';
+                else
+                    mat[l][c] = 'X';
+                nou = nou->urm;
+            }
+            aux = aux->urm;
+        }
+        afisare(n, m, mat, fisier2);
+    }
+    fclose(fisier1);
     fclose(fisier2);
     return 0;
 }
