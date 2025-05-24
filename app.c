@@ -1,6 +1,6 @@
 #include "gameoflife.h"
-#include<stdlib.h>
-#include<string.h>
+#include <stdlib.h>
+#include <string.h>
 int main(int argc, const char *argv[])
 {
     FILE *fisier1 = fopen(argv[1], "r");
@@ -72,18 +72,18 @@ int main(int argc, const char *argv[])
     }
     else if (t == 5) // pentru bonus
     {
-        Stiva *varf = NULL;
         char linie[9000];
         fgets(linie, sizeof(linie), fisier1);
         for (int gen = 1; gen <= k; gen++)
         {
-            Nod *cap_lista = NULL;
+            cap_lista = NULL;
             fgets(linie, sizeof(linie), fisier1);
-            char *p = strtok(linie, " ");
+            const char *p;
+            strtok(linie, " ");
             p = strtok(NULL, " ");
             while (p != NULL)
             {
-                int i = atoi(p);
+                i = atoi(p);
                 p = strtok(NULL, " ");
                 int j = atoi(p);
                 p = strtok(NULL, " ");
