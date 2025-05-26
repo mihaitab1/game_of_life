@@ -118,6 +118,15 @@ Nod *inversare_lista(Nod *cap_lista)
     }
     return aux;
 }
+void eliberare_lista(Nod *cap_lista)
+{
+    while (cap_lista)
+    {
+        Nod *aux = cap_lista;
+        cap_lista = cap_lista->urm;
+        free(aux);
+    }
+}
 Stiva *inversare_stiva(Stiva *varf)
 {
     Stiva *aux = NULL, *curent = varf, *urmator;
@@ -144,6 +153,16 @@ void afisare_stiva(Stiva *varf, FILE *fisier2)
         }
         fprintf(fisier2, "\n");
         aux = aux->urm;
+    }
+}
+void eliberare_stiva(Stiva *varf)
+{
+    while (varf)
+    {
+        Stiva *aux = varf;
+        eliberare_lista(aux->lista);
+        varf = varf->urm;
+        free(aux);
     }
 }
 arbore *creare_nod()
@@ -231,3 +250,42 @@ void preorder(arbore *root, FILE *fisier2, int n, int m, char mat[300][300])
         preorder(root->right, fisier2, n, m, aux_dreapta);
     }
 }
+void eliberare_arbore(arbore *root)
+{
+    if (!root)
+        return;
+    eliberare_arbore(root->left);
+    eliberare_arbore(root->right);
+    eliberare_lista(root->lista);
+    free(root);
+}
+/*Graph *construire_graf(int n, int m, char mat[300][300])
+{
+    int i, j, k = 0;
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+            if (mat[i][j] == 'X')
+                k++;
+    Graph *g = malloc(sizeof(Graph));
+    g->V = k;
+    g->E = 0;
+    k = 0;
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+            if (mat[i][j] == 'X')
+            {
+                g->a[k][0] = i;
+                g->a[k][1] = j;
+                k++;
+            }
+}
+void printGraph(Graph *g)
+{
+    int i, j;
+    for (i = 0; i < g->V; i++)
+    {
+        for (j = 0; j < g->V; j++)
+            printf("%d ", g->a[i][j]);
+        printf("\n");
+    }
+}*/

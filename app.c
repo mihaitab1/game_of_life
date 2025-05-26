@@ -58,17 +58,19 @@ int main(int argc, const char *argv[])
         root->lista = inversare_lista(root->lista);
         construire_arbore(root, mat, n, m, k, 0);
         preorder(root, fisier2, n, m, mat);
+        eliberare_arbore(root);
     }
     else if (t == 4)
     {
-        /*arbore *root = creare_nod();
+        arbore *root = creare_nod();
         for (int lin = 0; lin < n; lin++)
             for (int col = 0; col < m; col++)
                 if (mat[lin][col] == 'X')
                     root->lista = push(root->lista, lin, col);
         root->lista = inversare_lista(root->lista);
         construire_arbore(root, mat, n, m, k, 0);
-        preorder(root, fisier2, n, m, mat);*/
+        preorder(root, fisier2, n, m, mat);
+        eliberare_arbore(root);
     }
     else if (t == 5) // pentru bonus
     {
@@ -111,6 +113,7 @@ int main(int argc, const char *argv[])
         }
         afisare(n, m, mat, fisier2);
     }
+    eliberare_stiva(varf);
     fclose(fisier1);
     fclose(fisier2);
     return 0;

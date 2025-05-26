@@ -12,8 +12,8 @@
   <line>Command: /mnt/c/Users/Mihai/Desktop/tema_PA/gameoflife/a.out task1 argument --arg -b 100 --file=/mnt/c/Users/Mihai/Desktop/tema_PA/gameoflife/teste/in5.txt --out=/mnt/c/Users/Mihai/Desktop/tema_PA/gameoflife/OutputData/data5.out</line>
 </preamble>
 
-<pid>69380</pid>
-<ppid>69333</ppid>
+<pid>198585</pid>
+<ppid>198547</ppid>
 <tool>memcheck</tool>
 
 <args>
@@ -37,13 +37,13 @@
 
 <status>
   <state>RUNNING</state>
-  <time>00:00:00:00.188 </time>
+  <time>00:00:00:00.268 </time>
 </status>
 
 
 <status>
   <state>FINISHED</state>
-  <time>00:00:00:01.574 </time>
+  <time>00:00:00:02.849 </time>
 </status>
 
 <errorcounts>
